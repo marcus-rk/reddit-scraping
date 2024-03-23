@@ -17,12 +17,12 @@ fun main() {
     val redditComments: MutableList<String> = getRedditPostComments(driver, url)
     driver.quit()
 
-    // Console.log result:
+    // Print Reddit comments for testing:
     for (comment in redditComments.indices) {
         println("$comment: ${redditComments[comment]}\n");
     }
 
-    // TODO: Make comments save in excel
+    // Create excel file and write reddit comments
     val fileName: String = "test"
     createAndWriteToExcelFile(redditComments, fileName)
 }
@@ -54,6 +54,7 @@ fun getRedditPostComments(driver: ChromeDriver, url: String): MutableList<String
     return comments
 }
 
+// Create excel file with Reddit comments
 fun createAndWriteToExcelFile(comments: MutableList<String>, fileName: String): Unit {
     val xlWb = XSSFWorkbook()
     val xlWs = xlWb.createSheet()
