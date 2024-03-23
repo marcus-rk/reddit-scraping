@@ -1,8 +1,14 @@
 package com.example.reddit_scrapping
 
+// Selenium imports:
 import org.openqa.selenium.By
 import org.openqa.selenium.WebElement
 import org.openqa.selenium.chrome.ChromeDriver
+
+//  Write to excel imports:
+import org.apache.poi.ss.usermodel.Row
+import org.apache.poi.xssf.usermodel.XSSFWorkbook
+import java.io.FileOutputStream
 
 fun main() {
     // Scrape by url and save as MutableList of comment strings:
@@ -17,6 +23,8 @@ fun main() {
     }
 
     // TODO: Make comments save in excel
+    val fileName: String = "test"
+    createAndWriteToExcelFile(redditComments, fileName)
 }
 
 
@@ -44,4 +52,18 @@ fun getRedditPostComments(driver: ChromeDriver, url: String): MutableList<String
     }
 
     return comments
+}
+
+fun createAndWriteToExcelFile(comments: MutableList<String>, fileName: String): Unit {
+    val xlWb = XSSFWorkbook()
+    val xlWs = xlWb.createSheet()
+
+    for (i in comments.indices){
+        val row: Row = xlWs.createRow(i);
+        row.createCell(0).setCellValue(comments[i]);
+    }
+
+    val outputStream = FileOutputStream("app/src/main/java/com/example/reddit_scrapping/${fileName}.xlsx")
+    xlWb.write(outputStream)
+    xlWb.close()
 }
