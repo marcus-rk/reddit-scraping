@@ -43,4 +43,11 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    //You should copy the following into your build.gradle.kts file
+    implementation("org.seleniumhq.selenium:selenium-java:4.18.1")
+    //Excel gradle dependency
+    implementation("org.apache.poi:poi:5.2.3")
+    // https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
+    implementation("org.apache.poi:poi-ooxml:5.2.5")
 }
